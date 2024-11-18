@@ -47,6 +47,7 @@
 
 #define CGNS_VERSION 4500
 #define CGNS_DOTVERS 4.50
+#define CGNS_VERSION_3 3200
 
 #define CGNS_COMPATVERSION 2540
 #define CGNS_COMPATDOTVERS 2.54
@@ -1785,6 +1786,8 @@ CGNSDLL int cg_free(void *data);
 CGNSDLL const char *cg_get_error(void);
 CGNSDLL void cg_error_exit(void);
 CGNSDLL void cg_error_print(void);
+CGNSDLL void cg_set_version(int version);
+
 
 #ifdef __cplusplus
 }
