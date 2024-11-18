@@ -538,7 +538,8 @@ int cg_open(const char *filename, int mode, int *fn)
             FileVersion = (float) CGNS_COMPATDOTVERS;
             cg->version = CGNS_COMPATVERSION;
         } else {
-            FileVersion = (float) CGNS_DOTVERS;
+           // FileVersion = (float) CGNS_DOTVERS;
+           FileVersion = (float)CGNSLibVersion/1000;
             cg->version = CGNSLibVersion;
         }
 
@@ -602,7 +603,8 @@ int cg_open(const char *filename, int mode, int *fn)
                 FileVersion = (float) CGNS_COMPATDOTVERS;
                 cg->version = CGNS_COMPATVERSION;
             } else {
-                FileVersion = (float) CGNS_DOTVERS;
+                //FileVersion = (float) CGNS_DOTVERS;
+               FileVersion = (float)CGNSLibVersion/1000;
                 cg->version = CGNSLibVersion;
             }
 
@@ -18982,4 +18984,9 @@ int cg_free(void *data) {
         return CG_OK;
     }
     return CG_ERROR;
+}
+
+void cg_set_version(int version)
+{
+       CGNSLibVersion = version;
 }
