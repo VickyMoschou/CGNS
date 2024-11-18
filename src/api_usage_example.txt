@@ -1,0 +1,37 @@
+//Usage example
+
+// The user should always use the newer's version API
+// and have only the latest version's lib src code 
+
+typedef enum CGNSVersions {
+       CGNS_V_3_2_0 = 0,
+       CGNS_V_4_2_0    ,
+       CGNS_V_MAX
+} CGNSVersions;
+
+int func(void)
+{
+       CGNSVersions user_selection = getUserVersionOption(); // here the user makes his choice in which version to export
+       if (user_selection == CGNS_V_3_2_0) { 
+            cg_set_version(CGNS_VERSION_3);
+       } else {
+            cg_set_version(CGNS_VERSION);
+       }
+
+      // offsetsArray is introduced in v4 but v3 does not need it.
+       vector<cgsize_t> offsetsArray;
+       if (user_selection >= CGNS_V_4_2_0) {
+               offsetsArray.reserve(N);
+              offsetsArray.push_back(0);
+       }
+
+	     // code here to fill offsetsArray if needed
+        // .......................................
+
+       cgsize_t *offsets = NULL;
+       if (user_selection >= CGNS_V_4_2_0){
+              if (offsetsArray.size()) offsets = &offsetsArray[0];
+      }
+
+      // offsers = NULL for  v3, valid otherwise
+      WriteData(index_file, index_base, index_zone, &faces[0], elem_start, num_elems, name, cgns_type, offsets);
